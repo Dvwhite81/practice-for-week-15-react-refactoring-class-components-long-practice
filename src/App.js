@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Clock, { ClockToggle } from './components/Clock';
 import Folder from './components/Folder';
 import Weather from './components/Weather';
