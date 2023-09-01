@@ -4,30 +4,30 @@ import { toQueryString } from "../utils";
 function Weather() {
   const [weather, setWeather] = useState(null);
 
-  useEffect(() => {
-    const pollWeather = async (location) => {
-      let url = "http://api.openweathermap.org/data/2.5/weather?";
+  const pollWeather = async (location) => {
+    let url = "http://api.openweathermap.org/data/2.5/weather?";
 
-      const apiKey = process.env.REACT_APP_WEATHER_API;
+    const apiKey = process.env.REACT_APP_WEATHER_API;
 
-      const params = {
-        lat: location.coords.latitude,
-        lon: location.coords.longitude,
-        appid: apiKey,
-      };
-
-      url += toQueryString(params);
-
-      const res = await fetch(url);
-      if (res.ok) {
-        const weather = await res.json();
-        setWeather(weather);
-      } else {
-        alert("Check Weather API key!");
-      }
+    const params = {
+      lat: location.coords.latitude,
+      lon: location.coords.longitude,
+      appid: apiKey,
     };
 
-    navigator.geolocation.getCurrentPosition(
+    url += toQueryString(params);
+
+    const res = await fetch(url);
+    if (res.ok) {
+      const weather = await res.json();
+      setWeather(weather);
+    } else {
+      alert("Check Weather API key!");
+    }
+  }
+
+  useEffect(() => {
+    navigator.geolocation?.getCurrentPosition(
       pollWeather,
       (err) => console.log(err),
       { timeout: 10000 }
